@@ -14,11 +14,6 @@ const Product = new Schema(
     },
 );
 
-// Add plugins
-//mongoose.plugin(slug);
-// Product.plugin(mongooseDelete, {
-//     deletedAt: true,
-//     overrideMethods: 'all',
-// });
+
 
 module.exports = mongoose.model('Product', Product);

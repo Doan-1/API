@@ -27,6 +27,10 @@ class CommentController{
         })
         
     }
+    createNewComment =(req,res)=> {
+        const newComment = comment(req.body)
+        newComment.save()
+    }
     
 }
 module.exports = new CommentController();

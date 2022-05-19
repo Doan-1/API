@@ -8,6 +8,9 @@ const db = require('./Config/db');
 const productrouter = require('./routers/Product.Router');
 const userrouter = require('./routers/User.Router');
 const commnetrouter = require('./routers/Comment.Router');
+const cartrouter = require('./Controllers/Cart.Controller');
+const cartinforouter = require('./Controllers/CartInfo.Controller');
+const orderrouter = require('./Controllers/Order.Controller')
 
 db.connect();
 app.use(cors())
@@ -15,6 +18,9 @@ app.use(express.json());
 productrouter(app);
 userrouter(app);
 commnetrouter(app);
+cartinforouter(app);
+cartrouter(app);
+orderrouter(app);
 
 app.listen(port, () =>
     console.log(`App listening at http://localhost:${port}`),

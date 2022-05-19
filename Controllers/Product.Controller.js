@@ -1,5 +1,6 @@
 const product = require("../Models/Product");
 const { mutipleMongooseToObject } = require('../util/mongoose');
+const { mongooseToObject} = require('../util/mongoose');
 class ProductController{
     getProduct = (req,res) =>   {
         product.find({}, function(err, data) {
@@ -13,6 +14,7 @@ class ProductController{
             }
         })
     }
+
     getProductbyID = (req,res)=>{
         product.findOne({slug: req.params.slug}, function(err, data) {
             if(!err)
@@ -25,6 +27,26 @@ class ProductController{
             }
         })
         
+    }
+
+    cretenewProduct = (req,res)=>{
+        // console.log('hehe')
+        // console.log(req.body)
+        product.findOne({slug: req.params.slug}, function(err, data) {
+            if(!err)
+            {
+                if(data === null)
+                {
+                    //console.log('o day')
+                    const product1 = new product(req.body);
+                    //console.log(product1)
+                    product1.save()
+                }
+            }
+            else{
+                res.status(400).json({error:'error'})
+            }
+        })
     }
     
 }

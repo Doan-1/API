@@ -9,6 +9,8 @@ module.exports = (app) => {
     .get(ProductController.getProduct);
     app.route('/product/:slug')
     .get(ProductController.getProductbyID);
+    app.route('/product/create')
+    .post(ProductController.cretenewProduct);
 
     
 }
