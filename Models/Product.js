@@ -7,7 +7,9 @@ const Product = new Schema(
         product_name: {type: String},
         product_price: {type: String},
         description: { type: String },
-        slug:{type: String}
+        slug:{type: String},
+        product_img: {type: String},
+        categories: {type: String}
         
     },
 );
