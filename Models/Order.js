@@ -14,10 +14,10 @@ const Order = new Schema(
     },
 );
 
-Order.plugin(mongooseDelete, {
-    deletedAt: true,
-    overrideMethods: 'all',
-});
+// Order.plugin(mongooseDelete, {
+//     deletedAt: true,
+//     overrideMethods: 'all',
+// });
 
 
 module.exports = mongoose.model('Order', Order);

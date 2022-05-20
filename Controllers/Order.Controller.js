@@ -62,9 +62,23 @@ class OrderController{
         // })
         
     }
-    createNewOrder =(req,res)=> {
-        const newOrder = order(req.body)
-        newOrder.save()
+    createNewOrder = async (req,res)=> {
+        let result
+        try {
+            result = await order.findOne({id_user: req.body.id_user, id_product: req.body.id_product});
+        }
+        catch(err) {
+            console.log(err)
+            res.status(500).json({msg: err})
+            return;
+        }
+        if(result === null){
+            const newOrder = order(req.body)
+            newOrder.save()
+        }
+        //res.status(200).json(result)
+        // const newOrder = order(req.body)
+        // newOrder.save()
     }
     deleteByIDUser(req, res, next) {
         order.deleteMany({ id_user: req.params.id },function(err, data) {
