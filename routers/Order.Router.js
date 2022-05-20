@@ -9,6 +9,8 @@ module.exports = (app) => {
     // .get(UserController.getUser);
     app.route('/order/:id')
     .get(OrderController.getOrderbyIDUser);
-    // app.route('/comment/create')
-    // .post(CommentController.createNewComment);
+    app.route('/order/create')
+    .post(OrderController.createNewOrder);
+    app.route('/order/delete/:id')
+    .get(OrderController.deleteByIDUser);
 }

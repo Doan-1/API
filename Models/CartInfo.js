@@ -7,6 +7,7 @@ const CartInfo = new Schema(
         id_product: {type: String},
         product_name: {type: String},
         product_price: {type: String},
+        productt_img: {type: String},
         quantity: {type: String}
     
     },

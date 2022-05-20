@@ -14,23 +14,69 @@ class OrderController{
     //         }
     //     })
     // }
-    getOrderbyIDUser = (req,res)=>{
-        comment.find({id_user: req.params.id}, function(err, data) {
+    getOrderbyIDUser = async (req,res)=>{
+        let result
+        try {
+            result = await order.findOne({id_user: req.params.id});
+        }
+        catch(err) {
+            console.log(err)
+            res.status(500).json({msg: err})
+            return;
+        }
+        if(result === null){
+            res.status(404).json({msg: "not found"})
+            return;
+        }
+        //res.status(200).json(result)
+        else
+        {
+            order.find({id_product: req.params.id}, function(err, data) {
+                if(!err)
+                {
+                    console.log(data);
+                    res.json({data: mutipleMongooseToObject(data)});
+                }
+                else{
+                    res.status(400).json({error:'error'})
+                }
+            })
+        }
+        // order.find({id_user: req.params.id}, function(err, data) {
+        //     if(!err)
+        //     {
+        //         // if( data.map === null )
+        //         // {
+        //         //     console.log('null');
+        //         // }
+        //         // res.json({data: mutipleMongooseToObject(data)});
+        //         if(data === '[]')
+        //         {
+        //             console.log('hrere')
+        //         }
+        //         console.log(data)
+        //     }
+        //     else{
+        //         res.status(400).json({error:'error'})
+        //     }
+        // })
+        
+    }
+    createNewOrder =(req,res)=> {
+        const newOrder = order(req.body)
+        newOrder.save()
+    }
+    deleteByIDUser(req, res, next) {
+        order.deleteMany({ id_user: req.params.id },function(err, data) {
             if(!err)
             {
-                console.log(data);
-                res.json({data: mutipleMongooseToObject(data)});
+                console.log('Xoa thanh cong');
             }
             else{
                 res.status(400).json({error:'error'})
             }
         })
-        
     }
-    // createNewComment =(req,res)=> {
-    //     const newComment = comment(req.body)
-    //     newComment.save()
-    // }
     
 }
 module.exports = new OrderController();

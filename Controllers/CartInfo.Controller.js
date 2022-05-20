@@ -1,3 +1,4 @@
+const CartInfo = require("../Models/CartInfo");
 const cartinfo = require("../Models/CartInfo");
 const { mutipleMongooseToObject } = require('../util/mongoose');
 const { mongooseToObject} = require('../util/mongoose');
@@ -27,10 +28,10 @@ class CartInfoController{
         })
         
     }
-    // createNewComment =(req,res)=> {
-    //     const newComment = comment(req.body)
-    //     newComment.save()
-    // }
+    createNewCartInfo =(req,res)=> {
+        const newCartInfo = CartInfo(req.body)
+        newCartInfo.save()
+    }
     
 }
 module.exports = new CartInfoController();

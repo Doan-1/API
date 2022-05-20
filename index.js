@@ -8,9 +8,9 @@ const db = require('./Config/db');
 const productrouter = require('./routers/Product.Router');
 const userrouter = require('./routers/User.Router');
 const commnetrouter = require('./routers/Comment.Router');
-const cartrouter = require('./Controllers/Cart.Controller');
-const cartinforouter = require('./Controllers/CartInfo.Controller');
-const orderrouter = require('./Controllers/Order.Controller')
+const cartrouter = require('./routers/Cart.Router');
+const cartinforouter = require('./routers/CartInfo.Router');
+const orderrouter = require('./routers/Order.Router')
 
 db.connect();
 app.use(cors())

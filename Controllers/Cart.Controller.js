@@ -27,10 +27,10 @@ class CartController{
         })
         
     }
-    // createNewComment =(req,res)=> {
-    //     const newComment = comment(req.body)
-    //     newComment.save()
-    // }
+    createNewCart =(req,res)=> {
+        const newCart = cart(req.body)
+        cart.save()
+    }
     
 }
 module.exports = new CartController();

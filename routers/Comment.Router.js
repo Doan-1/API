@@ -11,6 +11,4 @@ module.exports = (app) => {
     .get(CommentController.getCommentbyIDProduct);
     app.route('/comment/create')
     .post(CommentController.createNewComment);
-
-    
 }
