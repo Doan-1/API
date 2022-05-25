@@ -6,7 +6,7 @@ class ProductController{
         product.find({}, function(err, data) {
             if(!err)
             {
-                console.log(data);
+                //console.log(data);
                 res.json({data: mutipleMongooseToObject(data)});
             }
             else{
@@ -32,14 +32,15 @@ class ProductController{
     cretenewProduct = (req,res)=>{
         // console.log('hehe')
         // console.log(req.body)
+        console.log('o day')
         product.findOne({slug: req.params.slug}, function(err, data) {
             if(!err)
             {
                 if(data === null)
                 {
-                    //console.log('o day')
+                    console.log('o day')
                     const product1 = new product(req.body);
-                    //console.log(product1)
+                    console.log(product1)
                     product1.save()
                 }
             }

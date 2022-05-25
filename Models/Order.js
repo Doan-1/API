@@ -5,11 +5,22 @@ const mongooseDelete = require('mongoose-delete');
 const Order = new Schema(
     {
         id_user: {type: String},
-        id_product: {type: String},
-        product_name: { type: String },
-        product_price:{type: String},
-        product_img: { type: String },
-        quantity: {type: String}
+        orders:{
+            type:[
+                {
+                    id_product: String,
+                    product_name: String,
+                    product_price: String,
+                    thumbnail: String,
+                    color: String,
+                    style: String,
+                    quantity: String,
+                    size: String
+                }
+            ],
+            required : true,
+            minlength: 1,
+        }
     
     },
 );

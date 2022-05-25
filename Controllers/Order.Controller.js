@@ -1,3 +1,4 @@
+
 const order = require("../Models/Order");
 const { mutipleMongooseToObject } = require('../util/mongoose');
 const { mongooseToObject} = require('../util/mongoose');
@@ -31,7 +32,7 @@ class OrderController{
         //res.status(200).json(result)
         else
         {
-            order.find({id_product: req.params.id}, function(err, data) {
+            order.find({id_user: req.params.id}, function(err, data) {
                 if(!err)
                 {
                     console.log(data);
@@ -42,30 +43,12 @@ class OrderController{
                 }
             })
         }
-        // order.find({id_user: req.params.id}, function(err, data) {
-        //     if(!err)
-        //     {
-        //         // if( data.map === null )
-        //         // {
-        //         //     console.log('null');
-        //         // }
-        //         // res.json({data: mutipleMongooseToObject(data)});
-        //         if(data === '[]')
-        //         {
-        //             console.log('hrere')
-        //         }
-        //         console.log(data)
-        //     }
-        //     else{
-        //         res.status(400).json({error:'error'})
-        //     }
-        // })
         
     }
     createNewOrder = async (req,res)=> {
         let result
         try {
-            result = await order.findOne({id_user: req.body.id_user, id_product: req.body.id_product});
+            result = await order.findOne({id_user: req.body.id_user});
         }
         catch(err) {
             console.log(err)
@@ -73,8 +56,46 @@ class OrderController{
             return;
         }
         if(result === null){
-            const newOrder = order(req.body)
-            newOrder.save()
+            // const newOrder = order(req.body)
+            // newOrder.save()
+            console.log("chua ton tai")
+        }
+        else
+        {
+            // console.log(result.orders)
+            // console.log("ton tai r ")
+            // console.log(req.body.id_product);
+            
+            let a = []
+            
+            a= result.orders;
+            //console.log(a)
+            let index = a.findIndex(
+                element => element.id_product === req.body.id_product
+            )
+            if(index === -1)
+            {
+                console.log('product chua co')
+            }
+            else
+            {
+                console.log('ton tai r')
+                a.map((item,index)=>{
+                    if(item.id_product === req.body.id_product)
+                    {
+                        console.log(item.quantity)
+                        item.quantity = req.body.quantity;
+                        console.log(item.quantity)
+                    }
+                })
+                try {
+                    await  order.updateOne({id_user: req.body.id_user},{$set: {orders: a}}
+                    );
+                  } catch (err) {
+                    res.status(550).json({ msg: err });
+                    return;
+                }
+            }
         }
         //res.status(200).json(result)
         // const newOrder = order(req.body)
@@ -84,7 +105,7 @@ class OrderController{
         order.deleteMany({ id_user: req.params.id },function(err, data) {
             if(!err)
             {
-                console.log('Xoa thanh cong');
+                //console.log('Xoa thanh cong');
             }
             else{
                 res.status(400).json({error:'error'})
