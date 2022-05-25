@@ -8,8 +8,14 @@ const Product = new Schema(
         product_price: {type: String},
         description: { type: String },
         slug:{type: String},
-        product_img: {type: String},
-        categories: {type: String}
+        categories: {type: String},
+        color: {type: String},
+        style: {type: String},
+        detail_info: {type: String},
+        discount: {type: Boolean},
+        discount_percent: {type: String},
+        thumbnail: {type: String}
+        
         
     },
 );

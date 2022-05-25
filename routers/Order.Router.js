@@ -13,4 +13,6 @@ module.exports = (app) => {
     .post(OrderController.createNewOrder);
     app.route('/order/delete/:id')
     .get(OrderController.deleteByIDUser);
+    app.route('/order/deleteOne')
+    .post(OrderController.deleteOnebyIdProduct);
 }

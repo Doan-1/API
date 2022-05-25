@@ -59,6 +59,7 @@ class OrderController{
             // const newOrder = order(req.body)
             // newOrder.save()
             console.log("chua ton tai")
+
         }
         else
         {
@@ -76,6 +77,25 @@ class OrderController{
             if(index === -1)
             {
                 console.log('product chua co')
+                let a = [];
+                a= result.orders;
+                
+                a.push({id_product: req.body.id_product,
+                        product_name: req.body.product_name,
+                        product_price: req.body.product_price,
+                        thumbnail: req.body.thumbnail,
+                        color: req.body.color,
+                        style: req.body.style,
+                        quantity: req.body.quantity,
+                        size: req.body.size})
+                console.log(a);
+                try {
+                    await  order.updateOne({id_user: req.body.id_user},{$set: {orders: a}}
+                    );
+                  } catch (err) {
+                    res.status(550).json({ msg: err });
+                    return;
+                }
             }
             else
             {
@@ -83,9 +103,11 @@ class OrderController{
                 a.map((item,index)=>{
                     if(item.id_product === req.body.id_product)
                     {
-                        console.log(item.quantity)
+                        //console.log(item.quantity)
                         item.quantity = req.body.quantity;
-                        console.log(item.quantity)
+                        item.color = req.body.color;
+                        item.size = req.body.size;
+                        //console.log(item.quantity)
                     }
                 })
                 try {
@@ -101,11 +123,38 @@ class OrderController{
         // const newOrder = order(req.body)
         // newOrder.save()
     }
-    deleteByIDUser(req, res, next) {
+    //delete 1 product
+    deleteOnebyIdProduct = async(req,res) => {
+        let result
+        try {
+            result = await order.findOne({id_user: req.body.id_user});
+        }
+        catch(err) {
+            console.log(err)
+            res.status(500).json({msg: err})
+            return;
+        }
+        let a = [];
+        a = result.orders;
+        console.log(a);
+        let newa = a.filter(function(element){
+            return element.id_product != req.body.id_product;
+        })
+        try {
+            await  order.updateOne({id_user: req.body.id_user},{$set: {orders: newa}}
+            );
+          } catch (err) {
+            res.status(550).json({ msg: err });
+            return;
+        }
+        
+    }
+    //delete toan bo
+    deleteByIDUser(req, res) {
         order.deleteMany({ id_user: req.params.id },function(err, data) {
             if(!err)
             {
-                //console.log('Xoa thanh cong');
+                console.log('Xoa thanh cong');
             }
             else{
                 res.status(400).json({error:'error'})
