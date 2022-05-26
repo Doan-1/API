@@ -59,6 +59,22 @@ class OrderController{
             // const newOrder = order(req.body)
             // newOrder.save()
             console.log("chua ton tai")
+            let a = [];
+            a.push({id_product: req.body.id_product,
+                product_name: req.body.product_name,
+                product_price: req.body.product_price,
+                thumbnail: req.body.thumbnail,
+                color: req.body.color,
+                style: req.body.style,
+                quantity: req.body.quantity,
+                size: req.body.size}) 
+            const neworder = order({id_user: req.body.id_user, orders: a})
+            try {
+                await  neworder.save();
+            } catch (err) {
+                res.status(550).json({ msg: err });
+                return;
+            }
 
         }
         else

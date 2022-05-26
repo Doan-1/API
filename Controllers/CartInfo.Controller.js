@@ -29,7 +29,7 @@ class CartInfoController{
         
     }
     createNewCartInfo =(req,res)=> {
-        const newCartInfo = CartInfo(req.body)
+        const newCartInfo = CartInfo({id_cart:req.body.id_cart, orders: req.body.orders})
         newCartInfo.save()
     }
     
