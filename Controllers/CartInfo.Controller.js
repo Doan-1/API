@@ -16,7 +16,7 @@ class CartInfoController{
     //     })
     // }
     getCartInfobyIDCart = (req,res)=>{
-        comment.find({id_cart: req.params.id}, function(err, data) {
+        cartinfo.find({id_cart: req.params.id}, function(err, data) {
             if(!err)
             {
                 console.log(data);
