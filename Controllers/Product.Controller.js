@@ -29,6 +29,21 @@ class ProductController{
         
     }
 
+    getProductbyCategory = (req,res)=>{
+        //console.log(req.params.categories);
+        product.find({categories: req.params.categories}, function(err, data) {
+            if(!err)
+            {
+                console.log(data);
+                res.json({data: mutipleMongooseToObject(data)});
+            }
+            else{
+                res.status(400).json({error:'error'})
+            }
+        })
+        
+    }
+
     cretenewProduct = (req,res)=>{
         // console.log('hehe')
         // console.log(req.body)

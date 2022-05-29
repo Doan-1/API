@@ -11,6 +11,8 @@ module.exports = (app) => {
     .get(ProductController.getProductbyID);
     app.route('/product/create')
     .post(ProductController.cretenewProduct);
+    app.route('/product/category/:categories')
+    .get(ProductController.getProductbyCategory);
 
     
 }
