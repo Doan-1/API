@@ -9,6 +9,7 @@ module.exports = (app) => {
     .get(UserController.getUser);
     app.route('/user/:id')
     .get(UserController.getUserbyID);
-
+    app.route('/user/favorite')
+    .post(UserController.updatefavorProduct);
     
 }
