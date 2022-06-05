@@ -15,7 +15,9 @@ const Product = new Schema(
         discount: {type: Boolean},
         discount_percent: {type: String},
         thumbnail: {type: String},
-        classify: {type: String}
+        classify: {type: String},
+        sold_quantity: {type: String},
+        status: {type: String}
     },
 );
 

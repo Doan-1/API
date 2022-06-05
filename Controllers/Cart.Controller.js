@@ -1,6 +1,7 @@
 const cart = require("../Models/Cart");
 const cartinfo = require("../Models/CartInfo");
-const order = require("../Models/Order")
+const order = require("../Models/Order");
+const product = require("../Models/Product");
 const { mutipleMongooseToObject } = require('../util/mongoose');
 const { mongooseToObject} = require('../util/mongoose');
 class CartController{
@@ -39,8 +40,8 @@ class CartController{
             res.status(500).json({msg: err})
             return;
         }
-        let a= []
-        a=cartFind
+        let a= [];
+        a=cartFind;
         let countid = 0;
         countid = a.length+1; 
         const newcart = cart({id_cart: countid, id_user: req.body.id_user, total: req.body.total, address: req.body.address, phone: req.body.phone, status:"da nhan don hang"}); 
@@ -52,6 +53,15 @@ class CartController{
         //console.log(newcartinfo)
         try {
             newcartinfo.save();
+            let b = [];
+            b = orderFind.orders;
+            b.map(async (item,index)=> {
+                let findpro = await product.findOne({id_product: item.id_product});
+                let newsoldquantity = Number(findpro.sold_quantity) + Number(item.quantity);
+                //console.log(newsoldquantity.toString())
+                await  product.updateOne({id_product: item.id_product},{$set: {sold_quantity: newsoldquantity}}
+                );
+            })
             await order.deleteMany({id_user: req.body.id_user});
         }
         catch(err) {
