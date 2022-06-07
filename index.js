@@ -11,6 +11,7 @@ const commnetrouter = require('./routers/Comment.Router');
 const cartrouter = require('./routers/Cart.Router');
 const cartinforouter = require('./routers/CartInfo.Router');
 const orderrouter = require('./routers/Order.Router')
+const salesrouter = require('./routers/Salesstatus.Router');
 
 db.connect();
 app.use(cors())
@@ -21,6 +22,7 @@ commnetrouter(app);
 cartinforouter(app);
 cartrouter(app);
 orderrouter(app);
+salesrouter(app);
 
 app.listen(port, () =>
     console.log(`App listening at http://localhost:${port}`),

@@ -13,6 +13,8 @@ module.exports = (app) => {
     .post(ProductController.cretenewProduct);
     app.route('/product/category/:categories')
     .get(ProductController.getProductbyCategory); 
+    app.route('/product/updatestatus')
+    .post(ProductController.updateProductStatus);
 
     
 }

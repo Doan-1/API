@@ -1,3 +1,4 @@
+const res = require("express/lib/response");
 const product = require("../Models/Product");
 const { mutipleMongooseToObject } = require('../util/mongoose');
 const { mongooseToObject} = require('../util/mongoose');
@@ -6,7 +7,6 @@ class ProductController{
         product.find({}, function(err, data) {
             if(!err)
             {
-                //console.log(data);
                 res.json({data: mutipleMongooseToObject(data)});
             }
             else{
@@ -63,6 +63,17 @@ class ProductController{
                 res.status(400).json({error:'error'})
             }
         })
+    }
+
+    updateProductStatus = async (req,res) =>{
+        try {
+            await product.updateOne({id_product: req.body.id_product},{$set: {status: req.body.status}})
+        }
+        catch(err) {
+            console.log(err)
+            res.status(500).json({msg: err})
+            return;
+        }
     }
     
 }
