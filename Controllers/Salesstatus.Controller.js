@@ -32,7 +32,7 @@ class SalesstatusController{
         total.map((item,index)=>{
             if (item.month === req.params.month)
             {
-                console.log(item.total)
+                //console.log(item.total)
                 res.json({data: item.total});
             }
         })

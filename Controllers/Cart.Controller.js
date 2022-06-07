@@ -45,15 +45,16 @@ class CartController{
         a=cartFind;
         let countid = 0;
         countid = a.length+1; 
-        //const newcart = cart({id_cart: countid, id_user: req.body.id_user, total: req.body.total, address: req.body.address, phone: req.body.phone, status:"da nhan don hang"}); 
-        //newcart.save();
+        const newcart = cart({id_cart: countid, id_user: req.body.id_user, total: req.body.total, address: req.body.address, phone: req.body.phone, status:"da nhan don hang"}); 
+        newcart.save();
         let orderFind = await order.findOne({id_user: req.body.id_user});
-
+        if(orderFind != null)
+        {
         //console.log(orderFind.orders)
-        //const newcartinfo = cartinfo({id_cart: countid, orders: orderFind.orders});
+        const newcartinfo = cartinfo({id_cart: countid, orders: orderFind.orders});
         //console.log(newcartinfo)
         try {
-            //newcartinfo.save();
+            newcartinfo.save();
             var time = new Date();
             //searh trong sales xem co time chua
             let salesfind = await salesstatus.findOne({year: time.getFullYear()});
@@ -80,12 +81,12 @@ class CartController{
                 }
                 else
                 {
-                    console.log('jeje')
+                    console.log('1 lan o day')
                     alltotal.map((item,index)=>{
                         if (item.month == time.getMonth())
                         {
                             item.total = (Number(item.total)+Number(req.body.total)).toString();
-                            console.log('hehe')
+                            console.log('1 lan o day nua ne')
                         }
                     })
                     try {
@@ -97,22 +98,23 @@ class CartController{
                     }
                 }
             }
-            // let b = [];
-            // b = orderFind.orders;
-            // b.map(async (item,index)=> {
-            //     let findpro = await product.findOne({id_product: item.id_product});
-            //     let newsoldquantity = Number(findpro.sold_quantity) + Number(item.quantity);
-            //     //console.log(newsoldquantity.toString())
-            //     await  product.updateOne({id_product: item.id_product},{$set: {sold_quantity: newsoldquantity}}
-            //     );
-            // })
-            // await order.deleteMany({id_user: req.body.id_user});
+            let b = [];
+            b = orderFind.orders;
+            b.map(async (item,index)=> {
+                let findpro = await product.findOne({id_product: item.id_product});
+                let newsoldquantity = Number(findpro.sold_quantity) + Number(item.quantity);
+                //console.log(newsoldquantity.toString())
+                await  product.updateOne({id_product: item.id_product},{$set: {sold_quantity: newsoldquantity}}
+                );
+            })
+            await order.deleteMany({id_user: req.body.id_user});
         }
         catch(err) {
             console.log(err)
             res.status(500).json({msg: err})
             return;
-        }       
+        } 
+    }      
     }
     
 }
