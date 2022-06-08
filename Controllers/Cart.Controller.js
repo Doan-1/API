@@ -31,6 +31,19 @@ class CartController{
         })
         
     }
+    getCartbyStatus = (req,res)=>{
+        cart.find({status: req.params.id}, function(err, data) {
+            if(!err)
+            {
+                console.log(data);
+                res.json({data: mutipleMongooseToObject(data)});
+            }
+            else{
+                res.status(400).json({error:'error'})
+            }
+        })
+        
+    }
     createNewCart = async (req,res)=> {
         let cartFind ;
         try {

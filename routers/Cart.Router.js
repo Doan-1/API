@@ -9,6 +9,8 @@ module.exports = (app) => {
     // .get(UserController.getUser);
     app.route('/cart/:id')
     .get(CartController.getCartbyIDUser);
+    app.route('/cart/status/:id')
+    .get(CartController.getCartbyStatus);
     app.route('/cart/create')
     .post(CartController.createNewCart);
 }

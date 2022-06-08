@@ -14,6 +14,17 @@ class ProductController{
             }
         })
     }
+    getProductdDesc = (req,res) =>   {
+        product.find({} , function(err, data) {
+            if(!err)
+            {
+                res.json({data: mutipleMongooseToObject(data)});
+            }
+            else{
+                res.status(400).json({error:'error'})
+            }
+        }).sort({sold_quantity: -1})
+    }
 
     getProductbyID = (req,res)=>{
         product.findOne({slug: req.params.slug}, function(err, data) {
