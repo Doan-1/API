@@ -43,6 +43,48 @@ class ProductController{
         })
         
     }
+    getProductbyPriceGreaterthan = (req,res)=>{
+        //console.log(req.params.categories);
+        product.find({product_price: {$gt: req.params.id}}, function(err, data) {
+            if(!err)
+            {
+                console.log(data);
+                res.json({data: mutipleMongooseToObject(data)});
+            }
+            else{
+                res.status(400).json({error:'error'})
+            }
+        })
+        
+    }
+    getProductbyPriceSmallerthan = (req,res)=>{
+        //console.log(req.params.categories);
+        product.find({product_price: {$lt: req.params.id}}, function(err, data) {
+            if(!err)
+            {
+                console.log(data);
+                res.json({data: mutipleMongooseToObject(data)});
+            }
+            else{
+                res.status(400).json({error:'error'})
+            }
+        })
+        
+    }
+    getProductbyPriceBetween = (req,res)=>{
+        //console.log(req.params.categories);
+        product.find({product_price: {$gt: req.params.gt, $lt: req.params.lt}}, function(err, data) {
+            if(!err)
+            {
+                console.log(data);
+                res.json({data: mutipleMongooseToObject(data)});
+            }
+            else{
+                res.status(400).json({error:'error'})
+            }
+        })
+        
+    }
 
     cretenewProduct = (req,res)=>{
         // console.log('hehe')

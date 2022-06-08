@@ -5,7 +5,7 @@ const Product = new Schema(
     {
         id_product: { type: String },
         product_name: {type: String},
-        product_price: {type: String},
+        product_price: {type: Number},
         description: { type: String },
         slug:{type: String},
         categories: {type: String},
@@ -16,7 +16,7 @@ const Product = new Schema(
         discount_percent: {type: String},
         thumbnail: {type: String},
         classify: {type: String},
-        sold_quantity: {type: String},
+        sold_quantity: {type: Number},
         status: {type: String}
     },
 );

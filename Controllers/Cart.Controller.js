@@ -41,6 +41,7 @@ class CartController{
             res.status(500).json({msg: err})
             return;
         }
+        console.log("o day")
         let a= [];
         a=cartFind;
         let countid = 0;
@@ -56,6 +57,7 @@ class CartController{
         try {
             newcartinfo.save();
             var time = new Date();
+            var monthnow = time.getMonth()+1;
             //searh trong sales xem co time chua
             let salesfind = await salesstatus.findOne({year: time.getFullYear()});
             if( salesfind != null)
@@ -65,11 +67,11 @@ class CartController{
                 //console.log('hihi')
                 //console.log(alltotal);
                 let index = alltotal.findIndex(
-                    element => element.month == time.getMonth()
+                    element => element.month ==  monthnow
                 )
                 if( index === -1 )
                 {
-                    alltotal.push({month: time.getMonth(), total: req.body.total});
+                    alltotal.push({month:  monthnow, total: req.body.total});
                     console.log(alltotal);
                     try {
                         await salesstatus.updateOne({year: time.getFullYear()},{$set: {sales: alltotal}}
@@ -81,12 +83,12 @@ class CartController{
                 }
                 else
                 {
-                    console.log('1 lan o day')
+                    //console.log('1 lan o day')
                     alltotal.map((item,index)=>{
-                        if (item.month == time.getMonth())
+                        if (item.month ==  monthnow)
                         {
                             item.total = (Number(item.total)+Number(req.body.total)).toString();
-                            console.log('1 lan o day nua ne')
+                            //console.log('1 lan o day nua ne')
                         }
                     })
                     try {
