@@ -54,7 +54,7 @@ class CartController{
             res.status(500).json({msg: err})
             return;
         }
-        console.log("o day")
+        //console.log("o day")
         let a= [];
         a=cartFind;
         let countid = 0;

@@ -166,8 +166,8 @@ class OrderController{
         
     }
     //delete toan bo
-    deleteByIDUser(req, res) {
-        order.deleteMany({ id_user: req.params.id },function(err, data) {
+    deleteByIDUser= async (req, res) => {
+        await order.deleteMany({ id_user: req.params.id },function(err, data) {
             if(!err)
             {
                 console.log('Xoa thanh cong');
@@ -177,6 +177,22 @@ class OrderController{
             }
         })
     }
-    
+    getTotalbyID= async (req,res) =>{
+        let result
+        try {
+            result = await order.findOne({id_user: req.body.id_user});
+        }
+        catch(err) {
+            console.log(err)
+            res.status(500).json({msg: err})
+            return;
+        }
+        let a =[]
+        a= result.orders;
+        let alltotal = 0;
+        a.map((item,index)=>{
+            alltotal = Number(alltotal) + Number(item.product_price)
+        })
+    }
 }
 module.exports = new OrderController();
