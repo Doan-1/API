@@ -15,4 +15,6 @@ module.exports = (app) => {
     .get(OrderController.deleteByIDUser);
     app.route('/order/deleteOne')
     .post(OrderController.deleteOnebyIdProduct);
+    app.route('/order/total/:id')
+    .get(OrderController.getTotalbyID);
 }

@@ -30,7 +30,7 @@ class ProductController{
         product.findOne({slug: req.params.slug}, function(err, data) {
             if(!err)
             {
-                console.log(data);
+                //console.log(data);
                 res.json({data: mongooseToObject(data)});
             }
             else{
@@ -45,7 +45,7 @@ class ProductController{
         product.find({categories: req.params.categories}, function(err, data) {
             if(!err)
             {
-                console.log(data);
+                //console.log(data);
                 res.json({data: mutipleMongooseToObject(data)});
             }
             else{

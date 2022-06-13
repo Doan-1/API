@@ -180,7 +180,7 @@ class OrderController{
     getTotalbyID= async (req,res) =>{
         let result
         try {
-            result = await order.findOne({id_user: req.body.id_user});
+            result = await order.findOne({id_user: req.params.id});
         }
         catch(err) {
             console.log(err)
@@ -191,8 +191,10 @@ class OrderController{
         a= result.orders;
         let alltotal = 0;
         a.map((item,index)=>{
-            alltotal = Number(alltotal) + Number(item.product_price)
+            alltotal = Number(alltotal) + Number(item.product_price) * Number(item.quantity);
         })
+        res.json({data: alltotal});
+
     }
 }
 module.exports = new OrderController();

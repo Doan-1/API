@@ -100,7 +100,7 @@ class CartController{
                     alltotal.map((item,index)=>{
                         if (item.month ==  monthnow)
                         {
-                            item.total = (Number(item.total)+Number(req.body.total)).toString();
+                            item.total = (Number(item.total) ).toString();
                             //console.log('1 lan o day nua ne')
                         }
                     })
