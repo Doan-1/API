@@ -11,6 +11,8 @@ module.exports = (app) => {
     .get(CartController.getCartbyIDUser);
     app.route('/cart/status/:id')
     .get(CartController.getCartbyStatus);
+    app.route('/cart/status/count/:id')
+    .get(CartController.getCountCartbyStatus);
     app.route('/cart/create')
     .post(CartController.createNewCart);
 }

@@ -14,6 +14,13 @@ class ProductController{
             }
         })
     }
+    getCountProduct = async (req,res) =>   {
+        let a = [];
+        a= await product.find({});
+        console.log(a.length);
+        res.json({data: a.length});
+        
+    }
     getProductdDesc = (req,res) =>   {
         product.find({} , function(err, data) {
             if(!err)

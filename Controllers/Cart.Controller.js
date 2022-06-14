@@ -44,6 +44,13 @@ class CartController{
         })
         
     }
+    getCountCartbyStatus = async(req,res)=>{
+        let a = [];
+        a= await cart.find({status: req.params.id});
+        //console.log(a.length);
+        res.json({data: a.length});
+        
+    }
     createNewCart = async (req,res)=> {
         let cartFind ;
         try {
