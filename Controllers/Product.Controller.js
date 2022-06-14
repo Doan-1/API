@@ -2,6 +2,8 @@ const res = require("express/lib/response");
 const product = require("../Models/Product");
 const { mutipleMongooseToObject } = require('../util/mongoose');
 const { mongooseToObject} = require('../util/mongoose');
+const fileUploader = require('../configs/cloudinary.config');
+
 class ProductController{
     getProduct = (req,res) =>   {
         product.find({}, function(err, data) {
@@ -19,7 +21,6 @@ class ProductController{
         a= await product.find({});
         console.log(a.length);
         res.json({data: a.length});
-        
     }
     getProductdDesc = (req,res) =>   {
         product.find({} , function(err, data) {
@@ -135,6 +136,7 @@ class ProductController{
             return;
         }
     }
+    
     
 }
 module.exports = new ProductController();
