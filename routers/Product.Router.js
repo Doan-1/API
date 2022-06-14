@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const fileUploader = require('../Config/cloudinary.config');
 
 const ProductController = require('../Controllers/Product.Controller');
 
@@ -25,6 +26,13 @@ module.exports = (app) => {
     .get(ProductController.getProductbyPriceBetween); 
     app.route('/product/updatestatus')
     .post(ProductController.updateProductStatus);
-
+    app.post('/product/cloudinary-upload', fileUploader.single('file'), (req, res, next) => {
+        if (!req.file) {
+          next(new Error('No file uploaded!'));
+          return;
+        }
+       
+        res.json({ secure_url: req.file.path });
+    });
     
 }
