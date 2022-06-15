@@ -17,7 +17,8 @@ const Product = new Schema(
         thumbnail: {type: String},
         classify: {type: String},
         sold_quantity: {type: Number},
-        status: {type: String}
+        status: {type: String},
+        listImage: {type: Array}
     },
 );
 

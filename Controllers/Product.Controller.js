@@ -105,30 +105,43 @@ class ProductController{
         
     }
 
-    cretenewProduct = (req,res)=>{
+    cretenewProduct = async (req,res) =>{
         // console.log('hehe')
         // console.log(req.body)
         console.log('o day')
-        product.findOne({slug: req.params.slug}, function(err, data) {
-            if(!err)
-            {
-                if(data === null)
-                {
-                    console.log('o day')
-                    const product1 = new product(req.body);
-                    console.log(product1)
-                    product1.save()
-                }
-            }
-            else{
-                res.status(400).json({error:'error'})
-            }
-        })
+        let a =[];
+        a = await product.find({});
+        let countid = 0;
+        countid = a.length+1;
+        try {
+            const product1 = new product(req.body);
+            product1.id_product = countid;
+            console.log(product1)
+            product1.save()
+        }
+        catch(err) {
+            console.log(err)
+            res.status(500).json({msg: err})
+            return;
+        }
     }
 
     updateProductStatus = async (req,res) =>{
         try {
             await product.updateOne({id_product: req.body.id_product},{$set: {status: req.body.status}})
+        }
+        catch(err) {
+            console.log(err)
+            res.status(500).json({msg: err})
+            return;
+        }
+    }
+    updateProduct = async (req,res) =>{
+        try {
+            await product.updateOne({id_product: req.body.id_product},{$set: {product_name: req.body.product_name,
+            product_price: req.body.product_price, description: req.body.description, slug: req.body.slug, categories: req.body.categories,
+            color: req.body.color, style: req.body.style, detail_info: req.body.detail_info, discount: req.body.discount, discount_percent: req.body.discount_percent,
+            classify: req.body.classify}})
         }
         catch(err) {
             console.log(err)

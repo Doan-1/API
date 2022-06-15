@@ -26,6 +26,8 @@ module.exports = (app) => {
     .get(ProductController.getProductbyPriceBetween); 
     app.route('/product/updatestatus')
     .post(ProductController.updateProductStatus);
+    app.route('/product/update')
+    .post(ProductController.updateProduct);
     app.post('/product/cloudinary-upload', fileUploader.single('file'), (req, res, next) => {
         if (!req.file) {
           next(new Error('No file uploaded!'));
