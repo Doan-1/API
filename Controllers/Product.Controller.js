@@ -2,7 +2,7 @@ const res = require("express/lib/response");
 const product = require("../Models/Product");
 const { mutipleMongooseToObject } = require('../util/mongoose');
 const { mongooseToObject} = require('../util/mongoose');
-const fileUploader = require('../configs/cloudinary.config');
+
 
 class ProductController{
     getProduct = (req,res) =>   {
