@@ -5,8 +5,8 @@ const CartInfoController = require('../Controllers/CartInfo.Controller');
 
 
 module.exports = (app) => {
-    // app.route('/user')
-    // .get(UserController.getUser);
+    app.route('/cartinfo')
+    .get(CartInfoController.getCartInfo);
     app.route('/cartinfo/:id')
     .get(CartInfoController.getCartInfobyIDCart);
     // app.route('/comment/create')

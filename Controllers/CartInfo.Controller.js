@@ -15,6 +15,17 @@ class CartInfoController{
     //         }
     //     })
     // }
+    getCartInfo = (req,res) =>   {
+        cartinfo.find({}, function(err, data) {
+            if(!err)
+            {
+                res.json({data: mutipleMongooseToObject(data)});
+            }
+            else{
+                res.status(400).json({error:'error'})
+            }
+        })
+    }
     getCartInfobyIDCart = (req,res)=>{
         cartinfo.find({id_cart: req.params.id}, function(err, data) {
             if(!err)
