@@ -187,9 +187,9 @@ class OrderController{
             res.status(500).json({msg: err})
             return;
         }
-        let a =[]
-        if(a!=null)
+        if(result !=null)
         {
+            let a =[];
             a= result.orders;
             let alltotal = 0;
             a.map((item,index)=>{
