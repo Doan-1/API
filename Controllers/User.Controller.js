@@ -3,6 +3,57 @@ const product = require("../Models/Product")
 const { mutipleMongooseToObject } = require('../util/mongoose');
 const { mongooseToObject} = require('../util/mongoose');
 class UserController{
+    Userlogin = async(req,res) =>{
+        let a = await user.findOne({user_name: req.body.username});
+        if( a!= null)
+        {
+            if(req.body.password == a.user_password)
+            {
+                console.log(a.id_user);
+                res.json({data: a.id_user});
+            }
+            else
+            {
+                console.log('sai pass');
+                res.status(400).json({error:'error'})
+            }
+        }
+        else
+        {
+            console.log('sai username');
+            res.status(404).json({error:'error'})
+        }
+    }
+    UserResigter = async(req,res) =>{
+        let a = await user.findOne({user_name: req.body.username});
+        if( a == null)
+        {
+            let b = [];
+            b = await user.find({});
+            let countid = 0;
+            countid = b.length +1;
+            const newuser = user({id_user: countid, user_name: req.body.username, user_password: req.body.password, user_email:'', user_phone:'',user_address:'',favorite:[]})
+            console.log(newuser);
+            newuser.save();
+        }
+        else
+        {
+            console.log('trung username');
+            res.status(404).json({error:'error'})
+        }
+    }
+    updateUser = async(req,res)=>{
+        try {
+            console.log('o day');
+            await user.updateOne({id_user: req.body.id},{$set: {user_email: req.body.email,user_phone: req.body.phone, user_address: req.body.address}});
+        }
+        catch(err) {
+            console.log(err)
+            res.status(500).json({msg: err})
+            return;
+        }
+
+    }
     getUser = (req,res) =>   {
         user.find({}, function(err, data) {
             if(!err)

@@ -11,5 +11,12 @@ module.exports = (app) => {
     .get(UserController.getUserbyID);
     app.route('/user/favorite')
     .post(UserController.updatefavorProduct);
+    app.route('/user/login')
+    .post(UserController.Userlogin);
+    app.route('/user/resigter')
+    .post(UserController.UserResigter);
+    app.route('/user/update')
+    .post(UserController.updateUser);
     
 }
+
