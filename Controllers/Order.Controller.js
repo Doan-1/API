@@ -188,12 +188,18 @@ class OrderController{
             return;
         }
         let a =[]
-        a= result.orders;
-        let alltotal = 0;
-        a.map((item,index)=>{
-            alltotal = Number(alltotal) + Number(item.product_price) * Number(item.quantity);
-        })
-        res.json({data: alltotal});
+        if(a!=null)
+        {
+            a= result.orders;
+            let alltotal = 0;
+            a.map((item,index)=>{
+                alltotal = Number(alltotal) + Number(item.product_price) * Number(item.quantity);
+            })
+            res.json({data: alltotal});
+        } 
+        else{
+            res.json({data: 0});
+        }  
 
     }
 }
