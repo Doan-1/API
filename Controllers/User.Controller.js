@@ -14,14 +14,12 @@ class UserController{
             }
             else
             {
-                console.log('sai pass');
-                res.status(400).json({error:'error'})
+                res.json({data: 'Sai mk'})
             }
         }
         else
         {
-            console.log('sai username');
-            res.status(404).json({error:'error'})
+            res.json({data: 'Sai username'})
         }
     }
     UserResigter = async(req,res) =>{
@@ -38,8 +36,7 @@ class UserController{
         }
         else
         {
-            console.log('trung username');
-            res.status(404).json({error:'error'})
+            res.json({data: 'username da ton tai'})
         }
     }
     updateUser = async(req,res)=>{

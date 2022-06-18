@@ -26,7 +26,7 @@ class OrderController{
             return;
         }
         if(result === null){
-            res.status(404).json({msg: "not found"})
+            res.json({data: {orders:[]}});
             return;
         }
         //res.status(200).json(result)
