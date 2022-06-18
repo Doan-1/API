@@ -7,8 +7,8 @@ const CommentController = require('../Controllers/Comment.Controller');
 module.exports = (app) => {
     // app.route('/user')
     // .get(UserController.getUser);
-    app.route('/comment/:id')
-    .get(CommentController.getCommentbyIDProduct);
+    app.route('/comment/:slug')
+    .get(CommentController.getCommentbySlug);
     app.route('/comment/create')
     .post(CommentController.createNewComment);
 }
