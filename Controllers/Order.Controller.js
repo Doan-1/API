@@ -26,7 +26,7 @@ class OrderController{
             return;
         }
         if(result === null){
-            res.json({data: {orders:[]}});
+            res.json({data:{0: {orders:[]}}});
             return;
         }
         //res.status(200).json(result)
