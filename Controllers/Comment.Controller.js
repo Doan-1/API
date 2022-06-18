@@ -14,8 +14,8 @@ class CommentController{
     //         }
     //     })
     // }
-    getCommentbySlug = (req,res)=>{
-        comment.find({slug: req.params.slug}, function(err, data) {
+    getCommentbyId= (req,res)=>{
+        comment.find({id_product: req.params.id}, function(err, data) {
             if(!err)
             {
                 console.log(data);
