@@ -71,7 +71,7 @@ class CartController{
         let orderFind = await order.findOne({id_user: req.body.id_user});
         if(orderFind != null)
         {
-        //console.log(orderFind.orders)
+        console.log(orderFind.orders)
         const newcartinfo = cartinfo({id_cart: countid, orders: orderFind.orders});
         //console.log(newcartinfo)
         try {
