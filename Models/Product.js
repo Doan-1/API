@@ -18,7 +18,8 @@ const Product = new Schema(
         classify: {type: String},
         sold_quantity: {type: Number},
         status: {type: String},
-        listImage: {type: Array}
+        listImage: {type: Array},
+        size: {type: Array}
     },
 );
 
