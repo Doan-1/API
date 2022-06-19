@@ -144,7 +144,8 @@ class CartController{
     }
     updateCartStatus = async (req,res) =>{
         try {
-            await product.updateOne({id_cart: req.body.id_cart},{$set: {status: req.body.status}})
+            console.log(req.body.id_cart, req.body.status)
+            await cart.updateOne({id_cart: req.body.id_cart},{$set: {status: req.body.status}})
         }
         catch(err) {
             console.log(err)
