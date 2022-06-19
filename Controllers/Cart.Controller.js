@@ -61,9 +61,9 @@ class CartController{
             res.status(500).json({msg: err})
             return;
         }
-        //console.log("o day")
         let a= [];
         a=cartFind;
+        //
         let countid = 0;
         countid = a.length+1; 
         const newcart = cart({id_cart: countid, id_user: req.body.id_user, total: req.body.total, address: req.body.address, phone: req.body.phone, status:"da nhan don hang"}); 
@@ -141,6 +141,16 @@ class CartController{
             return;
         } 
     }      
+    }
+    updateCartStatus = async (req,res) =>{
+        try {
+            await product.updateOne({id_cart: req.body.id_cart},{$set: {status: req.body.status}})
+        }
+        catch(err) {
+            console.log(err)
+            res.status(500).json({msg: err})
+            return;
+        }
     }
     
 }
