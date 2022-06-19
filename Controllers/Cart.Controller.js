@@ -54,7 +54,7 @@ class CartController{
     createNewCart = async (req,res)=> {
         let cartFind ;
         try {
-            cartFind = await cart.find({id_user: req.body.id_user})
+            cartFind = await cart.find({})
         }
         catch(err) {
             console.log(err)
@@ -72,7 +72,11 @@ class CartController{
         if(orderFind != null)
         {
         console.log(orderFind.orders)
-        const newcartinfo = cartinfo({id_cart: countid, orders: orderFind.orders});
+        let allcartinfo = [];
+        allcartinfo = await cartinfo.find({});
+        let countidcartinfo = 0;
+        countidcartinfo = allcartinfo.length + 1 ;
+        const newcartinfo = cartinfo({id_cart: countidcartinfo, orders: orderFind.orders});
         //console.log(newcartinfo)
         try {
             newcartinfo.save();
