@@ -21,7 +21,7 @@ class OrderController{
             result = await order.findOne({id_user: req.params.id});
         }
         catch(err) {
-            console.log(err)
+            //console.log(err)
             res.status(500).json({msg: err})
             return;
         }
@@ -35,7 +35,7 @@ class OrderController{
             order.find({id_user: req.params.id}, function(err, data) {
                 if(!err)
                 {
-                    console.log(data);
+                    //console.log(data);
                     res.json({data: mutipleMongooseToObject(data)});
                 }
                 else{
@@ -58,7 +58,7 @@ class OrderController{
         if(result === null){
             // const newOrder = order(req.body)
             // newOrder.save()
-            console.log("chua ton tai")
+            //console.log("chua ton tai")
             let a = [];
             a.push({id_product: req.body.id_product,
                 product_name: req.body.product_name,
@@ -92,7 +92,7 @@ class OrderController{
             )
             if(index === -1)
             {
-                console.log('product chua co')
+                //console.log('product chua co')
                 let a = [];
                 a= result.orders;
                 
@@ -104,7 +104,7 @@ class OrderController{
                         style: req.body.style,
                         quantity: req.body.quantity,
                         size: req.body.size})
-                console.log(a);
+                //console.log(a);
                 try {
                     await  order.updateOne({id_user: req.body.id_user},{$set: {orders: a}}
                     );
@@ -115,7 +115,7 @@ class OrderController{
             }
             else
             {
-                console.log('ton tai r')
+                //console.log('ton tai r')
                 a.map((item,index)=>{
                     if(item.id_product === req.body.id_product)
                     {
@@ -152,7 +152,7 @@ class OrderController{
         }
         let a = [];
         a = result.orders;
-        console.log(a);
+        //console.log(a);
         let newa = a.filter(function(element){
             return element.id_product != req.body.id_product;
         })

@@ -18,7 +18,7 @@ class CommentController{
         comment.find({id_product: req.params.id}, function(err, data) {
             if(!err)
             {
-                console.log(data);
+                //console.log(data);
                 res.json({data: mutipleMongooseToObject(data)});
             }
             else{

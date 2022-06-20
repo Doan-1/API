@@ -9,7 +9,7 @@ class UserController{
         {
             if(req.body.password == a.user_password)
             {
-                console.log(a.id_user);
+                //console.log(a.id_user);
                 res.json({data: a.id_user});
             }
             else
@@ -31,7 +31,7 @@ class UserController{
             let countid = 0;
             countid = b.length +1;
             const newuser = user({id_user: countid, user_name: req.body.username, user_password: req.body.password, user_email:'', user_phone:'',user_address:'',favorite:[]})
-            console.log(newuser);
+            //console.log(newuser);
             newuser.save();
         }
         else
@@ -41,7 +41,7 @@ class UserController{
     }
     updateUser = async(req,res)=>{
         try {
-            console.log('o day');
+            //console.log('o day');
             await user.updateOne({id_user: req.body.id},{$set: {user_email: req.body.email,user_phone: req.body.phone, user_address: req.body.address}});
         }
         catch(err) {
@@ -55,7 +55,7 @@ class UserController{
         user.find({}, function(err, data) {
             if(!err)
             {
-                console.log(data);
+                //console.log(data);
                 res.json({data: mutipleMongooseToObject(data)});
             }
             else{
@@ -67,7 +67,7 @@ class UserController{
         user.findOne({id_user: req.params.id}, function(err, data) {
             if(!err)
             {
-                console.log(data);
+               // console.log(data);
                 res.json({data: mongooseToObject(data)});
             }
             else{

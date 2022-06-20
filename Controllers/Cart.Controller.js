@@ -22,7 +22,7 @@ class CartController{
         cart.find({id_user: req.params.id}, function(err, data) {
             if(!err)
             {
-                console.log(data);
+                //console.log(data);
                 res.json({data: mutipleMongooseToObject(data)});
             }
             else{
@@ -35,7 +35,7 @@ class CartController{
         cart.find({status: req.params.id}, function(err, data) {
             if(!err)
             {
-                console.log(data);
+                //console.log(data);
                 res.json({data: mutipleMongooseToObject(data)});
             }
             else{
@@ -71,7 +71,7 @@ class CartController{
         let orderFind = await order.findOne({id_user: req.body.id_user});
         if(orderFind != null)
         {
-        console.log(orderFind.orders)
+        //console.log(orderFind.orders)
         let allcartinfo = [];
         allcartinfo = await cartinfo.find({});
         let countidcartinfo = 0;
@@ -96,7 +96,7 @@ class CartController{
                 if( index === -1 )
                 {
                     alltotal.push({month:  monthnow, total: req.body.total});
-                    console.log(alltotal);
+                    //console.log(alltotal);
                     try {
                         await salesstatus.updateOne({year: time.getFullYear()},{$set: {sales: alltotal}}
                         );
@@ -111,10 +111,11 @@ class CartController{
                     alltotal.map((item,index)=>{
                         if (item.month ==  monthnow)
                         {
-                            item.total = (Number(item.total) ).toString();
+                            item.total = (Number(item.total) + Number(req.body.total)).toString();
                             //console.log('1 lan o day nua ne')
                         }
                     })
+                    console.log(alltotal)
                     try {
                         await salesstatus.updateOne({year: time.getFullYear()},{$set: {sales: alltotal}}
                         );
@@ -144,7 +145,7 @@ class CartController{
     }
     updateCartStatus = async (req,res) =>{
         try {
-            console.log(req.body.id_cart, req.body.status)
+            //console.log(req.body.id_cart, req.body.status)
             await cart.updateOne({id_cart: req.body.id_cart},{$set: {status: req.body.status}})
         }
         catch(err) {

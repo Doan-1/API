@@ -19,7 +19,7 @@ class ProductController{
     getCountProduct = async (req,res) =>   {
         let a = [];
         a= await product.find({});
-        console.log(a.length);
+        //console.log(a.length);
         res.json({data: a.length});
     }
     getProductdDesc = (req,res) =>   {
@@ -67,7 +67,7 @@ class ProductController{
         product.find({product_price: {$gt: req.params.id}}, function(err, data) {
             if(!err)
             {
-                console.log(data);
+                //console.log(data);
                 res.json({data: mutipleMongooseToObject(data)});
             }
             else{
@@ -81,7 +81,7 @@ class ProductController{
         product.find({product_price: {$lt: req.params.id}}, function(err, data) {
             if(!err)
             {
-                console.log(data);
+                //console.log(data);
                 res.json({data: mutipleMongooseToObject(data)});
             }
             else{
@@ -95,7 +95,7 @@ class ProductController{
         product.find({product_price: {$gt: req.params.gt, $lt: req.params.lt}}, function(err, data) {
             if(!err)
             {
-                console.log(data);
+                //console.log(data);
                 res.json({data: mutipleMongooseToObject(data)});
             }
             else{
@@ -108,7 +108,7 @@ class ProductController{
     cretenewProduct = async (req,res) =>{
         // console.log('hehe')
         // console.log(req.body)
-        console.log('o day')
+        //console.log('o day')
         let a =[];
         a = await product.find({});
         let countid = 0;
@@ -116,7 +116,7 @@ class ProductController{
         try {
             const product1 = new product(req.body);
             product1.id_product = countid;
-            console.log(product1)
+            //console.log(product1)
             product1.save()
         }
         catch(err) {
